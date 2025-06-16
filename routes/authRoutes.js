@@ -1,14 +1,14 @@
 const express = require("express");
-const userRoutes = express.Router();
+const authRoutes = express.Router();
 const { getLogin, login, getRegister, register, logout } = require("../controllers/authController");
 
-userRoutes.get("/login", getLogin);
+authRoutes.get("/login", getLogin);
 
-userRoutes.post("/login", login);
+authRoutes.post("/login", login);
 
-userRoutes.get("/register", getRegister);
+authRoutes.get("/register", getRegister);
 
-userRoutes.post("/register", register);
+authRoutes.post("/register", register);
 
-userRoutes.get("/logout", logout);
-module.exports = userRoutes;
+authRoutes.get("/logout", logout);
+module.exports = authRoutes;

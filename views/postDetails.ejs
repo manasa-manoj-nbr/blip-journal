@@ -43,8 +43,11 @@
                         </div>
                     
                     <% if(user?._id?.toString()==comment?.author?._id?.toString()){%>
-                        <div class=" mt-8 text-right text-sm font-medium text-red-700 ">
-                            <a href="/comments/<%= comment?._id %>/delete" class="hover:text-red-600 px-10"><i class="fa-solid fa-trash"></i> Delete</a>
+                        <div class="my-8 py-4 px-30 flex flex-row justify-end gap-2 text-right text-sm font-medium text-red-700 ">
+                            <form action="/comments/<%= comment?._id %>?_method=DELETE" method="POST">
+                                <button type="submit" class="hover:text-red-600 px-10 cursor-pointer"><i class="fa-solid fa-trash"></i> Delete
+                                </button>
+                            </form>
                             <a href="/comments/<%= comment?._id %>/edit" class="hover:text-red-600"><i class="fa-solid fa-file-pen"></i> Edit</a>
                         </div>
                     <%} %>

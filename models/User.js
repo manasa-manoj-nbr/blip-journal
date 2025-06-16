@@ -19,6 +19,7 @@ const userSchema = new mongoose.Schema({
     profilePicture: {
         type: String,
         public_id: String,
+        url: String,
     },
     bio: {
         type: String,

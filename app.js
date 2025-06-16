@@ -7,8 +7,9 @@ const session = require("express-session");
 const mongoStore = require("connect-mongo");
 const methodOverride = require("method-override");
 const PORT = process.env.PORT || 3000;
-const userRoutes = require("./routes/authRoutes");
+const authRoutes = require("./routes/authRoutes");
 const postRoutes = require("./routes/postRoutes");
+const userRoutes = require("./routes/userRoutes");
 const passportConfig = require("./config/passport")
 const errorHandler = require("./middlewares/errorHandler");
 const commentRoutes = require("./routes/commentRoutes");
@@ -39,8 +40,9 @@ app.get("/", (req,res)=>{
         error: ""
     });
 })
-app.use("/auth", userRoutes);
+app.use("/auth", authRoutes);
 app.use("/posts", postRoutes);
+app.use("/user", userRoutes);
 app.use("/",commentRoutes)
 //EJS
 app.set("view engine", "ejs");

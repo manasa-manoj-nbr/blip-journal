@@ -1,9 +1,12 @@
 <%- include('partials/header',{ title: 'Edit Comment', user:user}) %>
-<h1>Edit Comment</h1>
-<form action="/comments/"<%=comment._id %>?_method=PUT" method="POST"> 
-    <textarea name="content" rows="4" cols="50" required>
-        <%= comment.content %>
-    </textarea>
-    <button type="submit">Update Comment</button>
-</form>
+<section class="m-20 p-20">
+    <h1 class="text-2xl font-semibold tracking-loose text-gray-500 my-4">Edit Comment</h1>
+    <form action="/comments/<%= comment._id %>?_method=PUT" method="POST"> 
+        <div class="w-full mx-auto m-8">
+            <label for="content" class="block mb-2 font-medium text-gray-900"> Content</label>
+            <textarea name="content" id="content" rows="4" cols="50" class="block p-2.5 w-full text-base text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" ><%= comment.content %></textarea>
+        </div>
+        <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 focus:ring-4 focus:ring-blue-600 focus:ring-opacity-50 transition-colors cursor-pointer">Update Comment</button>
+    </form>
+</section>
 <%- include('partials/footer') %>
