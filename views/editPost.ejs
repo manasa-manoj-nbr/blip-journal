@@ -1,0 +1,49 @@
+<%-include('partials/header')  %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%=title %></title>
+</head>
+<body class="m-20 p-20">
+    <h1>Edit Post</h1>
+    <!-- client side does not support HTTP request that involve put and delete. so we need to override -->
+    <form action="/posts/<%= post._id %>?_method=PUT" method="POST" enctype="multipart/form-data">
+        <div class="mb-5">
+            <label for="title" class="block mb-2 text-sm font-medium text-gray-900">Title</label>
+            <input type="text" name="title" id="title" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value="<%=post.title %>">
+        </div>
+        <div class="w-full mx-auto">
+            <label for="content" class="block mb-2 text-sm font-medium text-gray-900"> Content</label>
+            <textarea name="content" id="content" rows="10" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" ><%=post.content %></textarea>
+        </div>
+        <div class=" my-4 cursor-pointer flex w-full border overflow-hidden border-gray-200 shadow-2xs rounded-lg text-sm focus:outline-hidden focus:z-10 focus:border-blue-500">
+            <label class=" py-3 px-4 bg-gray-100 text-nowrap" for="images">Select Image</label>
+            <input class="group grow flex overflow-hidden h-full py-3 px-4" id="images" name="images" multiple type="file" onchange="previewImages()">
+        </div>
+        <div class="my-3 flex-row flex flex-wrap gap-2 mt-3" id="image-preview" class=></div>
+        <div class="my-3 flex-row flex flex-wrap gap-2 mt-3">
+            <% post?.images?.forEach((image)=>{%>
+                <img src="<%= image.url %>" alt="" class="w-1/4"/>
+            <%}) %>
+        </div>
+        <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 focus:ring-4 focus:ring-blue-600 focus:ring-opacity-50 transition-colors cursor-pointer">Submit
+        </button>
+    </form>
+</body>
+<script>
+    function previewImages(){
+        const preview = document.getElementById('image-preview');
+        preview.innerHTML = '';
+        const files = document.getElementById('images').files;
+        for(let i=0; i<files.length; i++){
+            const img = document.createElement('img');
+            img.src = URL.createObjectURL(files[i]);
+            img.classList.add("object-cover", "rounded-lg", "shadow-md");
+            img.style.width = "150px";
+            preview.appendChild(img)
+        }
+    }
+</script>
+<%- include('partials/footer') %>

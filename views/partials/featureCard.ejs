@@ -1,0 +1,21 @@
+<div class="group relative w-full h-36 sm:h-44 rounded-xl shadow-lg [transform-style:preserve-3d] transition-transform duration-700 hover:[transform:rotateY(180deg)] cursor-pointer border border-border perspective-1000">
+  <!-- Front -->
+  <div class="absolute inset-0 flex flex-col items-center justify-center bg-muted/70 rounded-xl shadow-md backface-hidden">
+    <span class="w-12 h-12 rounded-full flex items-center justify-center bg-gradient-to-br from-indigo-100 to-violet-100 text-black/80 shadow-sm mb-2">
+      <%= icon %>
+    </span>
+    <div class="font-semibold text-base sm:text-lg text-black text-center">
+      <%= title %>
+    </div>
+  </div>
+  <!-- Back -->
+  <div class="absolute inset-0 flex flex-col items-center justify-center px-4 bg-gradient-to-br from-black/10 to-purple-100/50 rounded-xl shadow-md rotate-y-180 backface-hidden">
+    <div class="text-sm sm:text-base text-muted-foreground text-center leading-relaxed font-semibold">
+      <%= desc1 %>
+    </div>
+    <div class="text-sm sm:text-base text-muted-foreground text-center leading-relaxed">
+      <%= desc2 %>
+    </div>
+  </div>
+</div>
+

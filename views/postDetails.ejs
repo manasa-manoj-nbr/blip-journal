@@ -1,0 +1,73 @@
+<%-include('partials/header', {title, user:user}) %>
+    <div class="mx-20 my-20 pt-10">
+        <h1 class="text-2xl font-semibold tracking-loose text-gray-500 my-4">Post Details</h1>
+
+        <h1 class="text-3xl uppercase text-center underline font-bold tracking-loose text-gray-700 my-4">
+            <%= post?.title %>
+        </h1>
+        <p class="mt-3 px-30 text-right text-sm italic font-semibold text-gray-400">
+            by <%= post.author.username %> on <%= post.createdAt.toDateString() %>
+        </p>
+        <p class="text-lg text-gray-800 my-3 px-10">
+            <%= post?.content %>
+        </p>
+        <div class="px-10 my-5 flex flex-row gap-5 ">
+            <% post?.images?.forEach((image)=>{%>
+                <img class="rounded-t-lg h-[300px] w-[400px]" src="<%- image.url %>" alt="" />
+                <%})%>
+        </div>
+
+        <!-- action buttons -->
+        <% if(user?._id?.toString()==post?.author?._id?.toString()){%>
+            <div class="my-8 py-4 px-30 text-right text-lg font-semibold text-red-700 flex flex-row justify-end gap-2">
+                <form action="/posts/<%= post._id %>?_method=DELETE" method="POST">
+                    <button type="submit" class="hover:text-red-600 px-10 cursor-pointer"><i class="fa-solid fa-trash"></i> Delete</button>
+                </form>
+                <a href="/posts/<%= post?._id %>/edit" class="hover:text-red-600 px-10 cursor-pointer"><i class="fa-solid fa-file-pen"></i> Edit</a>
+            </div>
+        <%} %>
+
+        <h3 class="text-2xl px-10 font-semibold tracking-loose text-left text-gray-500 mt-4">Comments</h3>
+        <!-- comment list -->
+        <div class="px-10 my-3">
+            <% if(post?.comment?.length>0){%>
+                <% post?.comment?.forEach((comment)=>{%>
+                    <div class="flex flex-row justify-between">
+                        <div class="flex flex-col">
+                            <h3 class="mt-3 text-xl font-semibold tracking-loose text-gray-700">
+                                <%= comment?.author?.username %>
+                            </h3>
+                            <p class="text-gray-800">
+                                <%= comment?.content %>
+                            </p>
+                        </div>
+                    
+                    <% if(user?._id?.toString()==comment?.author?._id?.toString()){%>
+                        <div class=" mt-8 text-right text-sm font-medium text-red-700 ">
+                            <a href="/comments/<%= comment?._id %>/delete" class="hover:text-red-600 px-10"><i class="fa-solid fa-trash"></i> Delete</a>
+                            <a href="/comments/<%= comment?._id %>/edit" class="hover:text-red-600"><i class="fa-solid fa-file-pen"></i> Edit</a>
+                        </div>
+                    <%} %>
+                </div>
+                    <%}) %>
+                        <%}else{%>
+                            <p class="my-3 font-semibold tracking-loose text-gray-800">
+                                No comments yet..
+                            </p>
+                            <%} %>
+        </div>
+
+        <!-- comment form -->
+        <div class="mb-40 mt-8 px-10 text-right">
+            <% if(user){%>
+                <form action="/posts/<%= post?._id %>/comment" method="POST">
+                    <textarea class="border border-gray-200 w-full p-4 mb-3 rounded-lg" rows="4" placeholder="Add a Comment" required name="content"></textarea>
+                    <input class=" bg-blue-600 text-white py-2 px-4 rounded-lg font-semibold hover:bg-blue-700 focus:ring-4 focus:ring-blue-600 focus:ring-opacity-50 transition-colors cursor-pointer" type="submit" value="Comment" />
+                </form>
+                <%}else{%>
+                    <h2>Please <a href="../auth/login">login</a> to comment</h2>
+                    <%} %>
+        </div>
+    </div>
+
+    <%- include('partials/footer') %>

@@ -1,0 +1,54 @@
+<%-include('partials/header') %>
+    <div class="flex min-h-screen w-full overflow-hidden bg-background text-foreground">
+        <!-- Left Image Section -->
+        <div class="relative flex-1 min-w-0 flex items-center justify-center hidden lg:flex">
+            <img
+            src="/images/homepage1.jpg"
+            alt="blip journal cover"
+            class="object-cover w-4/5 h-full absolute top-0 left-0 select-none opacity-95"
+            style="z-index: 1"
+            loading="eager"
+            />
+            <div class="z-20 text-right ">
+                <div class="text-white px-6 overflow-visible absolute right-35 bottom-40">
+                    <h2 class="text-7xl font-bold mb-2">LOVE, EAT,</h2>
+                    <p class="text-7xl font-bold text-yellow-300">BLOG.</p>
+                </div>
+            </div>
+        </div>
+        <section
+            class="flex-1 flex flex-col justify-center items-center mt-24 px-2 sm:px-8 py-12 lg:pl-20 bg-background">
+            <div class="lg:hidden pb-6 flex flex-col items-center">
+                <span class="font-playfair text-4xl leading-tight text-primary drop-shadow font-semibold">blip journal</span>
+                <div class="text-base text-muted-foreground mt-1 italic">Modern writing for curious minds.</div>
+            </div>
+            <h1 class="font-playfair text-5xl md:text-6xl tracking-tight text-primary mb-6 text-center">
+                Journal your <span
+                    class="bg-gradient-to-r from-indigo-400 to-purple-500 bg-clip-text font-semibold text-transparent">ideas</span>
+                beautifully.
+            </h1>
+            <!-- Features Section -->
+            <div class="grid grid-cols-3 gap-3 sm:gap-6 w-full max-w-2xl">
+                <%- include('partials/featureCard', { icon: '📝' , title: 'Content Creation' ,
+                    desc1: "Write Freely. Express Boldly.",
+                    desc2: "Your stories, your voice, your platform."}) %>
+                <%- include('partials/featureCard', { icon: '🎨' , title: 'Design & Experience' ,
+                    desc1: '"Minimal design. Maximum impact. ' ,
+                    desc2: "Crafted for creators, loved by readers. A blog space as beautiful as your thoughts."}) %>
+                <%- include('partials/featureCard', { icon: '⚙️' , title: ' Features/Utility' ,
+                    desc1: 'Edit with ease. Publish in style.',
+                    desc2: "Image-rich posts, seamless uploads." }) %>
+                <%- include('partials/featureCard', { icon: '🚀' ,title: 'Speed/Access' ,
+                    desc1: 'Access anywhere. Write everywhere.' ,
+                    desc2: "Lightning-fast posts at your fingertips." }) %>
+                <%- include('partials/featureCard', { icon: '🔒' , title: 'Trust & Security' ,
+                    desc1: 'Your content, your control.'  ,
+                    desc2: "Secure publishing. No distractions." }) %>
+            </div>
+            <a href="/auth/register"
+                class="mt-10 inline-block rounded-lg px-8 py-3 text-white bg-gradient-to-r from-black to-purple-500 font-semibold shadow-xl hover:from-purple-500 hover:to-black transition text-lg sm:mb-12 md:mb-4">
+                Start Journaling
+            </a>
+        </section>
+    </div>
+<%- include('partials/footer') %>
