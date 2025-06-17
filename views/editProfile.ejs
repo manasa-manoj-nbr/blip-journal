@@ -1,0 +1,75 @@
+<%- include('partials/header',{ title: 'Edit Profile', user:user}) %>
+<section class="m-20 p-20">
+    <h1 class="text-2xl font-semibold tracking-loose text-gray-500 my-4">Edit Profile</h1>
+    <div class="max-w-2xl border border-black">
+        <form action="/user/profile/edit" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()"> 
+                <div class="mt-5 text-base font-medium text-gray-900 flex flex-row gap-2 p-4">
+                    <label for="username" class="w-1/4  p-2.5">Username:</label>
+                    <input class="leading-none bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5" type="text" name="username" id="username" value="<%= user.username %>" required/>
+                </div>
+                <div class=" text-base font-medium text-gray-900 flex flex-row gap-2 p-4">
+                    <label for="email" class="w-1/4  p-2.5">Email</label>
+                    <input class="leading-none bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5" type="email" name="email" id="email" value="<%= user.email %>" required/>
+                </div>
+                <div class="text-base text-gray-900 flex flex-row gap-2 p-4">
+                    <label for="bio" class="w-1/4 font-medium p-2.5">Bio</label>
+                    <textarea class="p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" name="bio" id="bio" rows="3"><%= user.bio %></textarea>
+                </div>
+                <div>
+                    <div class="my-4 cursor-pointer flex w-full border overflow-hidden border-gray-200 shadow-2xs rounded-lg focus:outline-hidden focus:z-10 focus:border-blue-500">
+                        <label for="profilePicture" class="font-medium py-3 px-4 bg-gray-100 text-nowrap">Profile Picture</label>
+                        <input type="file" class="group grow flex overflow-hidden h-full py-3 px-4" name="profilePicture" id="profilePicture" onchange="previewImage()"/>
+                    </div>
+                    <div class="my-3 flex-row flex flex-wrap gap-2 mt-3">
+                        <% if(user.profilePicture && user.profilePicture.url){%>
+                            <img src="<%= user.profilePicture.url %>" alt="Profile Picture" id="currentProfilePicture" class="max-w-[150px] object-cover rounded-lg shadow-md"/>
+                        <%} %>
+                            <img id="image-preview" class="max-w-[150px] object-cover rounded-lg shadow-md" style="display: none;"/>
+                    </div>
+                </div>
+                <%if(error){%>
+                    <div class="text-red-500 px-4 py-3 m-2 relative font-semibold" role="alert">
+                        <%=error  %>
+                    </div>
+                <%}  %> 
+                <%if(success){%>
+                    <div class="font-semibold text-green-500 px-4 py-3  relative m-2" role="alert">
+                        <%=success  %>
+                    </div>
+                <%}  %> 
+            <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 focus:ring-4 focus:ring-blue-600 focus:ring-opacity-50 transition-colors cursor-pointer">Update Profile</button>
+        </form>
+    </div>
+</section>
+<script>
+    function previewImage(){
+        const preview = document.getElementById("image-preview");
+        const file = document.getElementById("profilePicture").files[0];
+        const currentImage = document.getElementById("currentProfilePicture");
+
+        if(file){
+            preview.src = URL.createObjectURL(file);
+            preview.style.display = "block";
+            if(currentImage){
+                currentImage.style.display = "none";
+            }
+        }else{
+            preview.style.display = "none";
+            if(currentImage){
+                currentImage.style.display = "block";
+            }
+        }
+    }
+
+    function validateForm(){
+        const username = document.getElementById("username").value;
+        const email = document.getElementById("email").value;
+        if(!username || !email){
+            alert("Username and Email are required.");
+            return false;
+        }
+        return true;
+    }
+</script>
+
+<%- include('partials/footer') %>
