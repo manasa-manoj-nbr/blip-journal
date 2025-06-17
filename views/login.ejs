@@ -54,7 +54,16 @@
                                         </button>
                                     </div>
                                 </div>
-
+                                <%if(error){%>
+                                    <div class="text-red-500 px-4 py-3 m-2 relative font-semibold" role="alert">
+                                        <%=error  %>
+                                    </div>
+                                    <%}  %> 
+                                <%if(success){%>
+                                    <div class="font-semibold text-green-500 px-4 py-3  relative m-2" role="alert">
+                                        <%=success  %>
+                                    </div>
+                                    <%}  %> 
                                 <!-- Submit Button -->
                                 <button type="submit"
                                     class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 focus:ring-4 focus:ring-blue-600 focus:ring-opacity-50 transition-colors cursor-pointer">
@@ -73,7 +82,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="lg:block lg:w-1/2 h-screen bg-cover bg-center"
+                <div class="md:block md:w-1/2 hidden h-screen bg-cover bg-center"
                     style="background-image: url('/images/signin.jpg');">
                     <div class="h-full flex items-center justify-center">
                         <div class="text-center text-white px-12">

@@ -6,7 +6,8 @@ exports.getLogin = asyncHandler((req, res) => {
     res.render("login", {
         title: "login",
         user: req.user,
-        error: ""
+        error: "",
+        success: ""
     });
 })
   
@@ -19,7 +20,8 @@ exports.login = asyncHandler( async (req, res,next) => {
             return res.render("login", {
                 title: "Login",
                 user: req.user,
-                error: info.message
+                error: info.message,
+                success: ""
             });
         }
         req.logIn(user, (err) => {
@@ -36,7 +38,8 @@ exports.getRegister = asyncHandler( (req, res) => {
     res.render("register", {
         title: "Register",
         user: req.user,
-        error: null
+        error: null,
+        success: ""
     });
 }
 )
@@ -48,7 +51,8 @@ exports.register = asyncHandler(async (req, res) => {
             return res.render("register", {
                 title: "Register",
                 user: req.user,
-                error: "User already exists"
+                error: "User already exists",
+                success: ""
             });
         }
     
@@ -63,7 +67,8 @@ exports.register = asyncHandler(async (req, res) => {
         res.render("register", {
             title: "Register",
             user: req.user,
-            error: error.message
+            error: error.message,
+            success: ""
         })
     }
 }
